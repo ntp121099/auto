@@ -1,8 +1,0 @@
-[build]
-  publish = "templates"  # Thư mục chứa các tệp HTML
-  command = "echo 'No build command needed'"  # Không cần lệnh build
-
-[[redirects]]
-  from = "/*"
-  to = "/pintet.html"
-  status = 200
